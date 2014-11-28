@@ -15,7 +15,7 @@ describe "Random#==" do
     a.should_not == b
   end
 
-  it "returns true if the two objects have the same seed" do
+  it "returns true if two new objects are initialized with the same seed" do
     a = Random.new(42)
     b = Random.new(42.5)
     a.seed.should == b.seed

@@ -202,6 +202,17 @@ describe "Random#rand with Range" do
     Random.new(42).rand(0..1.0).should be_kind_of(Float)
   end
 
+  it "if range is bounded by floats, return floats within range (inclusive)" do
+    prng = Random.new
+    100.times.each.map{ |t| 
+      prng.rand(1.0..2.0) }.all?{|n| n>=1.0 && n<=2.0 && n.is_a?(Float) }.should == true
+  end
+
+  it "if range startpoint > endpoint, returns nil" do
+    prng = Random.new
+    prng.rand(2.0..1.0).should == nil
+  end
+
   it "raises an ArgumentError when the startpoint lacks #+ and #- methods" do
     lambda do
       Random.new.rand(Object.new..67)
